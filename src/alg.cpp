@@ -1,7 +1,6 @@
 // Copyright 2022 NNTU-CS
 #include <cstdint>
 #include "alg.h"
-#include <iostream>
 
 bool checkPrime(uint64_t value) {
     if (value < 2) return false;
@@ -12,11 +11,12 @@ bool checkPrime(uint64_t value) {
 }
 
 uint64_t nPrime(uint64_t n) {
-    uint64_t count = 0;
+    if (n == 0) return 2;
+    uint64_t count = 1;  
     uint64_t number = 1;
     
     while (count < n) {
-        ++number;
+        number += 2;  
         if (checkPrime(number)) {
             ++count;
         }
@@ -25,14 +25,11 @@ uint64_t nPrime(uint64_t n) {
 }
 
 uint64_t nextPrime(uint64_t value) {
-    uint64_t prime = value;
-    bool found = false;
+    if (value < 2) return 2;
+    uint64_t prime = value % 2 ? value : value + 1;  
     
-    while (!found) {
-        ++prime;
-        if (checkPrime(prime)) {
-            found = true;
-        }
+    while (!checkPrime(prime)) {
+        prime += 2;  
     }
     return prime;
 }
@@ -46,7 +43,4 @@ uint64_t sumPrime(uint64_t hbound) {
     }
     return sum;
 }
-
-    }
-    return sum;
-}
+   
